@@ -1,0 +1,78 @@
+<!-- 
+    Assignment Module 9
+    Author: Jared Bears
+    Date:   02/21/2024
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment Module 9</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="month-list">
+            <h2>Months</h2>
+            <ul>
+                <li><a href="#" onclick="displayCalendar(0)">January</a></li>
+                <li><a href="#" onclick="displayCalendar(1)">February</a></li>
+                <li><a href="#" onclick="displayCalendar(2)">March</a></li>
+                <li><a href="#" onclick="displayCalendar(3)">April</a></li>
+                <li><a href="#" onclick="displayCalendar(4)">May</a></li>
+                <li><a href="#" onclick="displayCalendar(5)">June</a></li>
+                <li><a href="#" onclick="displayCalendar(6)">July</a></li>
+                <li><a href="#" onclick="displayCalendar(7)">August</a></li>
+                <li><a href="#" onclick="displayCalendar(8)">September</a></li>
+                <li><a href="#" onclick="displayCalendar(9)">October</a></li>
+                <li><a href="#" onclick="displayCalendar(10)">November</a></li>
+                <li><a href="#" onclick="displayCalendar(11)">December</a></li>
+            </ul>
+        </div>
+        <div class="calendar-box">
+            <h2>Calendar - 2024</h2>
+            <div id="calendar"></div>
+        </div>
+    </div>
+    <script>
+        displayCalendar(new Date().getMonth());
+        function displayCalendar(month) {
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+            var date = new Date(2024, month, 1);
+            var calendar = "<table><tr><th colspan='7'>" + monthNames[month] + "</th></tr>";
+            calendar += "<tr>";
+            for (var i = 0; i < days.length; i++) {
+                calendar += "<td class='days'>" + days[i] + "</td>";
+            }
+            calendar += "</tr><tr>";
+            for (var i = 0; i < date.getDay(); i++) {
+                calendar += "<td></td>";
+            }
+            while (date.getMonth() == month) {
+                if (date.getDate() == new Date().getDate() && date.getMonth() == new Date().getMonth() && date.getDay == 0) {
+                    calendar += "<td class='sunday' id='today'>" + date.getDate() + "</td>";
+                } else if (date.getDate() == new Date().getDate() && date.getMonth() == new Date().getMonth() && date.getDay == 6) {
+                    calendar += "<td class='saturday' id='today'>" + date.getDate() + "</td>";
+                } else if (date.getDate() == new Date().getDate() && date.getMonth() == new Date().getMonth()) {
+                    calendar += "<td class='weekday' id='today'>" + date.getDate() + "</td>";
+                } else if (date.getDay() == 0) {
+                    calendar += "<td class='sunday'>" + date.getDate() + "</td>";
+                } else if (date.getDay() == 6) {
+                    calendar += "<td class='saturday'>" + date.getDate() + "</td>";
+                } else {
+                    calendar += "<td class='weekday'>" + date.getDate() + "</td>";
+                }
+                if (date.getDay() == 6) {
+                    calendar += "</tr><tr>";
+                }
+                date.setDate(date.getDate() + 1);
+            }
+            calendar += "</tr></table>";
+            document.getElementById("calendar").innerHTML = calendar;
+        }
+    </script>
+</body>
+
+</html>
